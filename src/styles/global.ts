@@ -23,7 +23,7 @@ export const GlobalStyles = createGlobalStyle<Object>`
     font-weight: 500;
   }
 
-  h1 {
+  h1, h2 {
     font-size: 2.8rem;
   }
 
