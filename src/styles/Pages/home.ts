@@ -2,10 +2,15 @@ import { styled } from 'styled-components'
 import img from '@/assets/asset-header.png'
 const imgUrl = img.src
 
-export const ContainerHero = styled.section`
+const Wrapper = styled.div`
+  max-width: 1400px;
+`
+const Container = styled.section`
   width: 100%;
   height: 600px;
+`
 
+export const ContainerHero = styled(Container)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,9 +18,7 @@ export const ContainerHero = styled.section`
 
   background: ${({ theme }) => theme['background-soft-gray']};
 `
-export const WrapperHero = styled.div`
-  max-width: 1400px;
-
+export const WrapperHero = styled(Wrapper)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,5 +81,10 @@ export const HeadlineHero = styled.h1`
   }
 `
 export const SubHeadlineHero = styled.p`
-  font-size: 18px;
+  font-size: 19px;
+  color: ${({ theme }) => theme['gray-300']};
+`
+export const ContainerFreeTrial = styled.section`
+  font-size: 19px;
+  color: ${({ theme }) => theme['gray-300']};
 `

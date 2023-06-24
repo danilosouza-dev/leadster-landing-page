@@ -1,4 +1,5 @@
 import {
+  ContainerFreeTrial,
   ContainerHero,
   HeadlineHero,
   SubHeadlineHero,
@@ -8,17 +9,21 @@ import {
 
 export default function Home() {
   return (
-    <ContainerHero>
-      <WrapperHero>
-        <WebinarTag>Webnars exclusivos</WebinarTag>
-        <HeadlineHero>
-          Menos Conversinha, <span>Mais Conversão</span>
-        </HeadlineHero>
-        <SubHeadlineHero>
-          Conheças as estratégias que <b>mudaram o jogo</b> e como aplicá-la no
-          seu negócio
-        </SubHeadlineHero>
-      </WrapperHero>
-    </ContainerHero>
+    <>
+      <ContainerHero>
+        <WrapperHero>
+          <WebinarTag>Webnars exclusivos</WebinarTag>
+          <HeadlineHero>
+            Menos Conversinha, <span>Mais Conversão</span>
+          </HeadlineHero>
+          <SubHeadlineHero>
+            Conheças as estratégias que <b>mudaram o jogo</b> e como aplicá-la
+            no seu negócio
+          </SubHeadlineHero>
+        </WrapperHero>
+      </ContainerHero>
+
+      <ContainerFreeTrial></ContainerFreeTrial>
+    </>
   )
 }
