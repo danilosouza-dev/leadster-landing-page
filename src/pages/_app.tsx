@@ -10,15 +10,13 @@ import { Container } from '@/styles/pages/app'
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <ThemeProvider theme={defaultTheme}>
-        <Container>
-          <Header />
-          <Component {...pageProps} />
-          <Footer />
-        </Container>
-        <GlobalStyles />
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={defaultTheme}>
+      <Container>
+        <Header />
+        <Component {...pageProps} />
+        <Footer />
+      </Container>
+      <GlobalStyles />
+    </ThemeProvider>
   )
 }

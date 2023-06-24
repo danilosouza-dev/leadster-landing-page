@@ -14,9 +14,6 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=DM+Sans&family=Plus+Jakarta+Sans:wght@200;500;700&display=swap"
           rel="stylesheet"
         />
-        <title>
-          Leadster: Chatbot de Marketing para Aumentar Geração de Leads
-        </title>
       </Head>
       <body>
         <Main />
