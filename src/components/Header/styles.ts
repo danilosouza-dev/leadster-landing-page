@@ -1,5 +1,9 @@
 import { styled } from 'styled-components'
 
 export const ContainerHeader = styled.header`
-  color: #000;
+  width: 100%;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
