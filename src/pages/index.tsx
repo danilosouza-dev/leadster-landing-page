@@ -3,6 +3,8 @@ import imgComparative from '@/assets/comparativo_img_CTA.png'
 import seloRD from '@/assets/selo_RD.png'
 import noCard from '@/assets/no-card-dark.webp'
 import rating from '@/assets/rating.webp'
+import youtube from '../services/youtube'
+import { GetServerSideProps } from 'next'
 
 import {
   BackgroundShapeComparative,
@@ -21,6 +23,37 @@ import {
   WrapperHero,
 } from '@/styles/pages/home'
 import { DemonstrationButton } from '@/components/DemonstrationButton'
+
+interface Video {
+  kind: 'youtube#searchResult'
+  etag: string
+  id: {
+    kind: string
+    videoId: string
+    channelId: string
+    playlistId: string
+  }
+  snippet: {
+    publishedAt: string
+    channelId: string
+    title: string
+    description: string
+    thumbnails: {
+      (key: any): {
+        url: string
+        width: string
+        height: string
+      }
+    }
+    channelTitle: string
+  }
+}
+
+interface StateProps {
+  videos: Video[]
+}
+
+type Props = StateProps
 
 export default function Home() {
   return (
@@ -73,4 +106,14 @@ export default function Home() {
       </ContainerComparative>
     </>
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const response = await youtube.get('/search', { params: { q: 'camuda' } })
+  const videos = response.data.items
+  return {
+    props: {
+      videos,
+    },
+  }
 }
