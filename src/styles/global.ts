@@ -7,7 +7,7 @@ export const GlobalStyles = createGlobalStyle<Object>`
     box-sizing: border-box;
   }
   body {
-    font-family: 'DM Sans', sans-serif;;
+    font-family: 'DM Sans', sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     background: ${(props) => props.theme['background-white']};

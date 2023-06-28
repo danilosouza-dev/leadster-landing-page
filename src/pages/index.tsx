@@ -13,16 +13,25 @@ import {
   ContainerDemonstrationButton,
   ContainerHero,
   ContainerNoCard,
+  ContainerSectionCardVideos,
+  CredicardText,
   HeadlineComparative,
   HeadlineHero,
-  NoCardText,
   RatingTaxt,
   SubHeadlineHero,
   WebinarTag,
+  WrapperCardVideos,
+  WrapperFilter,
   WrapperHeadlineComparative,
   WrapperHero,
+  WrapperTagButtons,
 } from '@/styles/pages/home'
 import { DemonstrationButton } from '@/components/DemonstrationButton'
+import { CardVideo } from '@/components/CardVideo'
+import { TagFilter } from '@/components/TagFilter'
+import React, { useEffect, useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
+import { SelectFilter } from '@/components/SelectFilter'
 
 interface Video {
   kind: 'youtube#searchResult'
@@ -39,7 +48,7 @@ interface Video {
     title: string
     description: string
     thumbnails: {
-      (key: any): {
+      medium: {
         url: string
         width: string
         height: string
@@ -55,7 +64,54 @@ interface StateProps {
 
 type Props = StateProps
 
-export default function Home() {
+type Button = {
+  id: number
+  label: string
+}
+
+const buttons = [
+  { id: 1, label: 'Agência' },
+  { id: 2, label: 'Chatbot' },
+  { id: 3, label: 'Marketing Digital' },
+  { id: 4, label: 'Geração de Leads' },
+  { id: 5, label: 'Mídia Paga' },
+]
+
+export default function Home({ videos }: Props) {
+  const [selectedTagButtonId, setSelectedTagButtonId] = useState(0)
+  const [selectedTagButtonLabel, setSelectedTagButtonIdLabel] = useState('')
+  const [videosList, setVideosList] = useState<Video[]>([])
+  const [sortBy, setSortBy] = useState('Mais Recentes')
+
+  useEffect(() => {
+    const fetchVideos = async () => {
+      const response = await youtube.get('/search', {
+        params: {
+          channelId: 'UCrydTYsZKHPE_pe9NNLMeDA',
+          q: selectedTagButtonLabel,
+        },
+      })
+      const videos = response.data.items
+      setVideosList(videos)
+    }
+
+    fetchVideos()
+  }, [selectedTagButtonLabel, sortBy])
+
+  function handleColorButton(button: Button) {
+    if (button.id === selectedTagButtonId) {
+      setSelectedTagButtonId(0)
+      setSelectedTagButtonIdLabel('')
+    } else {
+      setSelectedTagButtonId(button.id)
+      setSelectedTagButtonIdLabel(button.label)
+    }
+  }
+
+  function handleSelectFilter(selectedLabel: string) {
+    setSortBy(selectedLabel)
+  }
+
   return (
     <>
       <ContainerHero>
@@ -71,7 +127,77 @@ export default function Home() {
         </WrapperHero>
       </ContainerHero>
 
-      <div style={{ height: 650 }}></div>
+      <ContainerSectionCardVideos>
+        <WrapperFilter>
+          <WrapperTagButtons>
+            {buttons.map((button) => {
+              return (
+                <TagFilter
+                  key={button.id}
+                  label={button.label}
+                  name={button.id === selectedTagButtonId ? 'selected' : ''}
+                  onClick={() => handleColorButton(button)}
+                />
+              )
+            })}
+          </WrapperTagButtons>
+          <SelectFilter onSelectFilter={handleSelectFilter} />
+        </WrapperFilter>
+        <WrapperCardVideos>
+          <AnimatePresence>
+            {sortBy === 'Mais Recentes'
+              ? videosList
+                  .filter((i) => i.id.videoId)
+                  .sort(
+                    (a, b) =>
+                      new Date(b.snippet.publishedAt).getTime() -
+                      new Date(a.snippet.publishedAt).getTime(),
+                  )
+                  .map((post: Video) => {
+                    return (
+                      <CardVideo
+                        key={post.id.videoId}
+                        thumbnail={post.snippet.thumbnails.medium.url}
+                        title={post.snippet.title}
+                      />
+                    )
+                  })
+              : sortBy === 'Mais Antigos'
+              ? videosList
+                  .filter((i) => i.id.videoId)
+                  .sort(
+                    (a, b) =>
+                      new Date(a.snippet.publishedAt).getTime() -
+                      new Date(b.snippet.publishedAt).getTime(),
+                  )
+                  .map((post: Video) => {
+                    return (
+                      <CardVideo
+                        key={post.id.videoId}
+                        thumbnail={post.snippet.thumbnails.medium.url}
+                        title={post.snippet.title}
+                      />
+                    )
+                  })
+              : videosList
+                  .filter(
+                    (i) =>
+                      i.id.videoId &&
+                      (i.snippet.title.includes(selectedTagButtonLabel) ||
+                        i.snippet.description.includes(selectedTagButtonLabel)),
+                  )
+                  .map((post: Video) => {
+                    return (
+                      <CardVideo
+                        key={post.id.videoId}
+                        thumbnail={post.snippet.thumbnails.medium.url}
+                        title={post.snippet.title}
+                      />
+                    )
+                  })}
+          </AnimatePresence>
+        </WrapperCardVideos>
+      </ContainerSectionCardVideos>
 
       <ContainerComparative>
         <Imagem src={imgComparative} alt="logo leadster" />
@@ -91,9 +217,9 @@ export default function Home() {
 
           <ContainerNoCard>
             <Imagem src={noCard} alt="logo leadster" />
-            <NoCardText>
+            <CredicardText>
               <b>Não</b> é necessário Cartão de Crédito
-            </NoCardText>
+            </CredicardText>
 
             <Imagem src={rating} alt="logo leadster" />
             <RatingTaxt>
@@ -108,8 +234,12 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const response = await youtube.get('/search', { params: { q: 'camuda' } })
+export const getServerSideProps: GetServerSideProps = async () => {
+  const response = await youtube.get('/search', {
+    params: {
+      channelId: 'UCrydTYsZKHPE_pe9NNLMeDA',
+    },
+  })
   const videos = response.data.items
   return {
     props: {

@@ -84,6 +84,12 @@ export const SocialItem = styled.div`
 
   transition: all 0.3s;
 
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   &:hover {
     background: ${({ theme }) => theme['blue-300']};
 

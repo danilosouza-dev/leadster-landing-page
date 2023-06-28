@@ -2,14 +2,14 @@ import { styled } from 'styled-components'
 import img from '@/assets/asset-header.png'
 const imgUrl = img.src
 
-const Wrapper = styled.div`
+const wrapper = styled.div`
   max-width: 1400px;
   height: 600px;
 
   display: flex;
 `
 
-const Container = styled.section`
+const container = styled.section`
   width: 100%;
 
   display: flex;
@@ -19,7 +19,7 @@ const Container = styled.section`
   overflow: hidden;
 `
 
-export const ContainerHero = styled(Container)`
+export const ContainerHero = styled(container)`
   background: ${({ theme }) => theme['background-soft-gray']};
 
   align-items: center;
@@ -27,7 +27,7 @@ export const ContainerHero = styled(Container)`
   flex-direction: column;
 `
 
-export const WrapperHero = styled(Wrapper)`
+export const WrapperHero = styled(wrapper)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -97,7 +97,7 @@ export const SubHeadlineHero = styled.p`
   color: ${({ theme }) => theme['gray-300']};
 `
 
-export const ContainerComparative = styled(Container)`
+export const ContainerComparative = styled(container)`
   font-size: 19px;
   color: ${({ theme }) => theme['gray-300']};
   background: ${({ theme }) => theme['background-soft-gray']};
@@ -127,7 +127,7 @@ export const BackgroundShapeComparative = styled.div`
   z-index: 0;
 `
 
-export const WrapperHeadlineComparative = styled(Wrapper)`
+export const WrapperHeadlineComparative = styled(wrapper)`
   flex-direction: column;
   justify-content: center;
 
@@ -186,7 +186,7 @@ export const ContainerNoCard = styled.div`
   margin-top: 18px;
 `
 
-export const NoCardText = styled.div`
+export const CredicardText = styled.div`
   font-size: 1.05rem;
   padding-right: 10px;
   border-right: 2px solid ${({ theme }) => theme['gray-200']};
@@ -195,4 +195,50 @@ export const NoCardText = styled.div`
 export const RatingTaxt = styled.div`
   font-size: 1.05rem;
   padding-right: 10px;
+`
+
+export const ContainerSectionCardVideos = styled(container)`
+  flex-direction: column;
+`
+
+export const WrapperCardVideos = styled.div`
+  max-width: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 0 100px 100px;
+
+  &::before {
+    content: '';
+    width: 95%;
+    height: 2px;
+    background: ${({ theme }) => theme['gray-100']};
+    margin-bottom: 30px;
+  }
+
+  &::after {
+    content: '';
+    width: 95%;
+    height: 2px;
+    background: ${({ theme }) => theme['gray-100']};
+  }
+`
+
+export const WrapperFilter = styled.div`
+  max-width: 1440px;
+  width: 1140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 75px 0 20px;
+`
+
+export const WrapperTagButtons = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
 `
