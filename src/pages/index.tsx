@@ -1,8 +1,8 @@
 import Imagem from 'next/image'
-import imgComparative from '@/assets/comparativo_img_CTA.png'
-import seloRD from '@/assets/selo_RD.png'
-import noCard from '@/assets/no-card-dark.webp'
-import rating from '@/assets/rating.webp'
+import imgComparative from '../assets/comparativo_img_CTA.png'
+import seloRD from '../assets/selo_RD.png'
+import noCard from '../assets/no-card-dark.webp'
+import rating from '../assets/rating.webp'
 import youtube from '../services/youtube'
 import { GetServerSideProps } from 'next'
 
@@ -25,16 +25,16 @@ import {
   WrapperHeadlineComparative,
   WrapperHero,
   WrapperTagButtons,
-} from '@/styles/pages/home'
-import { DemonstrationButton } from '@/components/DemonstrationButton'
-import { CardVideo } from '@/components/CardVideo'
-import { TagFilter } from '@/components/TagFilter'
+} from '../styles/Pages/home'
+import { DemonstrationButton } from '../components/DemonstrationButton'
+import { CardVideo } from '../components/CardVideo'
+import { TagFilter } from '../components/TagFilter'
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
-import { SelectFilter } from '@/components/SelectFilter'
-import { ModalVideo } from '@/components/ModalVideo'
-import { Pagination } from '@/components/Pagination'
-import { ModalChat } from '@/components/ModalChat'
+import { SelectFilter } from '../components/SelectFilter'
+import { ModalVideo } from '../components/ModalVideo'
+import { Pagination } from '../components/Pagination'
+import { ModalChat } from '../components/ModalChat'
 interface Video {
   kind: 'youtube#searchResult'
   etag: string

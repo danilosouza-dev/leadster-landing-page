@@ -7,7 +7,7 @@ import {
   WrapperNav,
 } from './styles'
 import Image from 'next/image'
-import logoAnimation from '@/assets/logo-leadster-animada.gif'
+import logoAnimation from '../../assets/logo-leadster-animada.gif'
 import { BiLogoLinkedin, BiLogoInstagram, BiLogoFacebook } from 'react-icons/bi'
 import Link from 'next/link'
 
