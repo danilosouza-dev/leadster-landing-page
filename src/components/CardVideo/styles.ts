@@ -15,6 +15,10 @@ export const ContainerCardVideo = styled.div`
   transition: all 0.5s;
   cursor: pointer;
 
+  img {
+    max-height: 200px;
+  }
+
   svg {
     position: absolute;
     top: 50%;

@@ -1,9 +1,7 @@
 import { styled } from 'styled-components'
 
 export const ContainerFooter = styled.footer`
-  /* max-width: 1400px; */
   width: 100%;
-  /* height: 400px; */
   padding: 50px;
 
   display: flex;
@@ -20,20 +18,35 @@ export const ContainerFooter = styled.footer`
 `
 
 export const WrapperNav = styled.div`
-  width: 1165px;
-  padding: 0 12px;
+  width: 100%;
+  max-width: 1400px;
+  padding: 0 100px;
 
-  /* display: flex;
-  align-items: center;
-  justify-content: space-between; */
+  @media screen and (max-width: 1254px) {
+    padding: 0 50px;
+  }
 `
 
 export const NavMenu = styled.nav`
   display: flex;
-  display: flex;
   align-items: center;
   justify-content: space-between;
-  /* flex-direction: column; */
+
+  @media screen and (max-width: 1024px) {
+    flex-wrap: wrap;
+    gap: 35px;
+  }
+
+  @media screen and (max-width: 635px) {
+    nav:last-child {
+      width: 190px;
+    }
+  }
+
+  @media screen and (max-width: 487px) {
+    flex-direction: column;
+    align-content: center;
+  }
 `
 
 export const ListMenu = styled.nav`
@@ -69,6 +82,15 @@ export const ListMenu = styled.nav`
       color: ${({ theme }) => theme['blue-300']};
     }
   }
+
+  @media screen and (max-width: 487px) {
+    gap: 5px;
+    align-items: center;
+
+    li:first-child {
+      margin-bottom: 8px;
+    }
+  }
 `
 
 export const SocialItem = styled.div`
@@ -95,9 +117,6 @@ export const SocialItem = styled.div`
 
     svg {
       fill: #fff;
-      /* filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(68deg)
-        brightness(104%) contrast(101%);
-    } */
     }
   }
 `

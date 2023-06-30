@@ -36,7 +36,7 @@ export const WrapperSelect = styled.div`
 
 export const Select = styled.div`
   width: 190px;
-  height: 100px;
+  height: 130px;
 
   display: flex;
   flex-direction: column;

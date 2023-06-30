@@ -32,7 +32,9 @@ import { TagFilter } from '@/components/TagFilter'
 import React, { useEffect, useState } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { SelectFilter } from '@/components/SelectFilter'
-
+import { ModalVideo } from '@/components/ModalVideo'
+import { Pagination } from '@/components/Pagination'
+import { ModalChat } from '@/components/ModalChat'
 interface Video {
   kind: 'youtube#searchResult'
   etag: string
@@ -57,7 +59,6 @@ interface Video {
     channelTitle: string
   }
 }
-
 interface StateProps {
   videos: Video[]
 }
@@ -78,10 +79,61 @@ const buttons = [
 ]
 
 export default function Home({ videos }: Props) {
+  const [isModaVideolOpen, setIsModaVideolOpen] = useState(false)
+  const [isModalChatOpen, setIsModalChatOpen] = useState(false)
+
+  const [videoId, setVideoId] = useState('')
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const [selectedTagButtonId, setSelectedTagButtonId] = useState(0)
-  const [selectedTagButtonLabel, setSelectedTagButtonIdLabel] = useState('')
-  const [videosList, setVideosList] = useState<Video[]>([])
+  const [selectedTagButtonLabel, setSelectedTagButtonLabel] = useState('')
   const [sortBy, setSortBy] = useState('Mais Recentes')
+
+  const [videosList, setVideosList] = useState<Video[]>(videos)
+  const [currentPage, setCurrentPage] = useState(0)
+  const videosPerPage = 9
+  const [totalPages, setTotalPages] = useState(
+    Math.ceil(videosList.length / videosPerPage - 1),
+  )
+
+  const startIndex = currentPage * videosPerPage
+  const endIndex = startIndex + videosPerPage
+  const currentItems = videosList.slice(startIndex, endIndex)
+
+  const filteredVideosList =
+    sortBy === 'Mais Recentes'
+      ? handleCurrentVideos().sort(
+          (a, b) =>
+            new Date(b.snippet.publishedAt).getTime() -
+            new Date(a.snippet.publishedAt).getTime(),
+        )
+      : sortBy === 'Mais Antigos'
+      ? handleCurrentVideos().sort(
+          (a, b) =>
+            new Date(a.snippet.publishedAt).getTime() -
+            new Date(b.snippet.publishedAt).getTime(),
+        )
+      : currentItems.filter(
+          (video) =>
+            (video.id.videoId &&
+              video.snippet.title.includes(selectedTagButtonLabel)) ||
+            video.snippet.description.includes(selectedTagButtonLabel),
+        )
+
+  function handleCurrentVideos() {
+    const currentVideos = videosList
+      .filter((video) => video.id.videoId)
+      .slice(startIndex, endIndex)
+    return currentVideos
+  }
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 600,
+      left: 0,
+      behavior: 'smooth',
+    })
+  }, [currentPage])
 
   useEffect(() => {
     const fetchVideos = async () => {
@@ -92,24 +144,73 @@ export default function Home({ videos }: Props) {
         },
       })
       const videos = response.data.items
+
       setVideosList(videos)
+      setCurrentPage(0)
+      setTotalPages(Math.ceil(videos.length / videosPerPage - 1))
     }
 
     fetchVideos()
-  }, [selectedTagButtonLabel, sortBy])
+    setSortBy('Mais Recentes')
+  }, [selectedTagButtonLabel])
+
+  useEffect(() => {
+    const pp = videosList.filter(
+      (video) =>
+        (video.id.videoId &&
+          video.snippet.title.includes(selectedTagButtonLabel)) ||
+        video.snippet.description.includes(selectedTagButtonLabel),
+    )
+    if (pp.length > videosPerPage) {
+      setTotalPages(Math.ceil(pp.length / videosPerPage - 1))
+    } else {
+      setTotalPages(Math.ceil(pp.length / videosPerPage))
+    }
+  }, [sortBy])
 
   function handleColorButton(button: Button) {
     if (button.id === selectedTagButtonId) {
       setSelectedTagButtonId(0)
-      setSelectedTagButtonIdLabel('')
+      setSelectedTagButtonLabel('')
+      setSortBy('Mais Recentes')
     } else {
       setSelectedTagButtonId(button.id)
-      setSelectedTagButtonIdLabel(button.label)
+      setSelectedTagButtonLabel(button.label)
+      setSortBy('Mais Recentes')
     }
   }
 
   function handleSelectFilter(selectedLabel: string) {
-    setSortBy(selectedLabel)
+    if (selectedTagButtonLabel.length) {
+      setSortBy(selectedLabel)
+    }
+  }
+
+  function handleOpenModalVideo(
+    videoId: string,
+    title: string,
+    description: string,
+  ) {
+    setIsModaVideolOpen(true)
+    setVideoId(videoId)
+    setTitle(title)
+    setDescription(description)
+  }
+
+  function handleCloseModalChat() {
+    setIsModalChatOpen(false)
+  }
+
+  function handleOpenModalChat() {
+    setIsModalChatOpen(true)
+  }
+
+  function handleCloseModalVideo() {
+    setIsModaVideolOpen(false)
+  }
+
+  function handlePagination(page: number) {
+    setCurrentPage(page)
   }
 
   return (
@@ -141,62 +242,30 @@ export default function Home({ videos }: Props) {
               )
             })}
           </WrapperTagButtons>
-          <SelectFilter onSelectFilter={handleSelectFilter} />
+          <SelectFilter onSelectFilter={handleSelectFilter} sortBy={sortBy} />
         </WrapperFilter>
+
         <WrapperCardVideos>
           <AnimatePresence>
-            {sortBy === 'Mais Recentes'
-              ? videosList
-                  .filter((i) => i.id.videoId)
-                  .sort(
-                    (a, b) =>
-                      new Date(b.snippet.publishedAt).getTime() -
-                      new Date(a.snippet.publishedAt).getTime(),
-                  )
-                  .map((post: Video) => {
-                    return (
-                      <CardVideo
-                        key={post.id.videoId}
-                        thumbnail={post.snippet.thumbnails.medium.url}
-                        title={post.snippet.title}
-                      />
-                    )
-                  })
-              : sortBy === 'Mais Antigos'
-              ? videosList
-                  .filter((i) => i.id.videoId)
-                  .sort(
-                    (a, b) =>
-                      new Date(a.snippet.publishedAt).getTime() -
-                      new Date(b.snippet.publishedAt).getTime(),
-                  )
-                  .map((post: Video) => {
-                    return (
-                      <CardVideo
-                        key={post.id.videoId}
-                        thumbnail={post.snippet.thumbnails.medium.url}
-                        title={post.snippet.title}
-                      />
-                    )
-                  })
-              : videosList
-                  .filter(
-                    (i) =>
-                      i.id.videoId &&
-                      (i.snippet.title.includes(selectedTagButtonLabel) ||
-                        i.snippet.description.includes(selectedTagButtonLabel)),
-                  )
-                  .map((post: Video) => {
-                    return (
-                      <CardVideo
-                        key={post.id.videoId}
-                        thumbnail={post.snippet.thumbnails.medium.url}
-                        title={post.snippet.title}
-                      />
-                    )
-                  })}
+            {filteredVideosList.map((video: Video) => {
+              return (
+                <CardVideo
+                  key={video.id.videoId}
+                  videoId={video.id.videoId}
+                  title={video.snippet.title}
+                  description={video.snippet.description}
+                  thumbnail={video.snippet.thumbnails.medium.url}
+                  onModalOpen={handleOpenModalVideo}
+                />
+              )
+            })}
           </AnimatePresence>
         </WrapperCardVideos>
+        <Pagination
+          pages={totalPages}
+          handlePagination={handlePagination}
+          currentPage={currentPage}
+        />
       </ContainerSectionCardVideos>
 
       <ContainerComparative>
@@ -211,7 +280,10 @@ export default function Home({ videos }: Props) {
           </ComparativeText>
 
           <ContainerDemonstrationButton>
-            <DemonstrationButton text="Ver demonstração" />
+            <DemonstrationButton
+              text="Ver demonstração"
+              onModalChatOpen={handleOpenModalChat}
+            />
             <Imagem src={seloRD} alt="logo leadster" />
           </ContainerDemonstrationButton>
 
@@ -230,6 +302,20 @@ export default function Home({ videos }: Props) {
 
         <BackgroundShapeComparative />
       </ContainerComparative>
+
+      <AnimatePresence>
+        <ModalVideo
+          isOpen={isModaVideolOpen}
+          onClose={handleCloseModalVideo}
+          videoId={videoId}
+          title={title}
+          description={description}
+        />
+      </AnimatePresence>
+
+      <AnimatePresence>
+        <ModalChat isOpen={isModalChatOpen} onClose={handleCloseModalChat} />
+      </AnimatePresence>
     </>
   )
 }

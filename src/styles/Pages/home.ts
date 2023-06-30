@@ -208,7 +208,7 @@ export const WrapperCardVideos = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   gap: 30px;
-  padding: 0 100px 100px;
+  padding: 0 50px 15px;
 
   &::before {
     content: '';

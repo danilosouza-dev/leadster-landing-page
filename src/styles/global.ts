@@ -11,11 +11,17 @@ export const GlobalStyles = createGlobalStyle<Object>`
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     background: ${(props) => props.theme['background-white']};
+
+    position: relative;
   }
 
   button, input, optgroup, select, textarea {
     font-weight: 600;
     font-size: 1rem;
+  }
+
+  button {
+    cursor: pointer;
   }
 
   h1, h2, h3, h4, h5, h6 {

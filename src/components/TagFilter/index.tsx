@@ -1,6 +1,5 @@
 import React from 'react'
 import { ContainerTagFilter } from './styles'
-
 interface TagFilterProps {
   label: string
   name: 'selected' | ''
