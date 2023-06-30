@@ -1,6 +1,5 @@
 import { ContainerPagination, RoundEffect } from './styles'
 import React from 'react'
-
 interface PaginationProps {
   pages: number
   currentPage: number

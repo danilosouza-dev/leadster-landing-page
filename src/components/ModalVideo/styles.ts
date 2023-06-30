@@ -1,12 +1,11 @@
 import { styled } from 'styled-components'
-
 interface ContainerModalVideoProps {
   isOpen: boolean
 }
 
 export const ContainerModalVideo = styled.div<ContainerModalVideoProps>`
   width: 33vw;
-  height: 85vh;
+  height: 95vh;
   max-width: 600px;
   min-height: 780px;
 
@@ -33,6 +32,29 @@ export const ContainerModalVideo = styled.div<ContainerModalVideoProps>`
     &:hover {
       filter: brightness(0.3);
     }
+  }
+
+  @media screen and (max-width: 1024px) {
+    min-width: 33vw;
+    width: 600px;
+    min-height: 100px;
+    height: 60vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 95vw;
+    height: 80vh;
+
+    h1 {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 428px) {
+    min-height: 100px;
+    height: 99vh;
   }
 `
 
@@ -66,8 +88,8 @@ export const Title = styled.h1`
   padding: 20px;
   font-size: 22px;
   font-weight: 700;
-  /* width: 70%; */
 `
+
 export const WrapperVideo = styled.div`
   width: 100%;
 
@@ -81,12 +103,19 @@ export const WrapperVideo = styled.div`
 export const Description = styled.div`
   width: 100%;
   padding: 50px 20px 30px;
+
+  @media screen and (max-width: 625px) {
+    padding: 17px 10px 10px;
+  }
 `
 
 export const SupportMaterial = styled(Description)`
   padding: 25px 20px;
-`
 
+  @media screen and (max-width: 625px) {
+    padding: 17px 10px 10px;
+  }
+`
 interface SupportMaterialButtonProps {
   color?: string
   Backgroundcolor?: string
@@ -101,7 +130,6 @@ export const SupportMaterialButton = styled.button<SupportMaterialButtonProps>`
   align-items: center;
   justify-content: flex-end;
   background: ${(props) => props.Backgroundcolor};
-  /* padding-left: 30px; */
   padding: 5px 5px 5px 40px;
   border: 0;
   border-radius: 4px;
@@ -110,6 +138,26 @@ export const SupportMaterialButton = styled.button<SupportMaterialButtonProps>`
 
   &:hover {
     filter: brightness(0.94);
+  }
+
+  @media screen and (max-width: 496px) {
+    height: 20px;
+    font-size: 10px;
+    padding: 5px 5px 5px 35px;
+
+    svg {
+      width: 18px;
+    }
+  }
+
+  @media screen and (max-width: 400px) {
+    height: 20px;
+    font-size: 9px;
+    padding: 5px 5px 5px 23px;
+
+    svg {
+      width: 14px;
+    }
   }
 `
 
@@ -123,6 +171,10 @@ export const WrapperIconDownload = styled.div<SupportMaterialButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media screen and (max-width: 496px) {
+    width: 20px;
+  }
 `
 
 export const WrapperSupportMaterialButton = styled.div`
@@ -130,6 +182,11 @@ export const WrapperSupportMaterialButton = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-top: 15px;
+
+  @media screen and (max-width: 496px) {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
 `
 
 export const TitleSection = styled.h3`
@@ -149,7 +206,6 @@ export const TitleSection = styled.h3`
 export const TextSection = styled.p`
   font-size: 1rem;
   margin-top: 10px;
-  /* font-weight: 700; */
 `
 
 export const BackDrop = styled.div<ContainerModalVideoProps>`

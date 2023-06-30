@@ -16,6 +16,7 @@ export const ContainerCardVideo = styled.div`
   cursor: pointer;
 
   img {
+    width: 100%;
     max-height: 200px;
   }
 
@@ -52,6 +53,15 @@ export const ContainerCardVideo = styled.div`
   &:hover::before {
     visibility: visible;
     background: rgba(0, 125, 255, 0.5);
+  }
+
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    height: auto;
+
+    &::before {
+      width: 0;
+    }
   }
 `
 

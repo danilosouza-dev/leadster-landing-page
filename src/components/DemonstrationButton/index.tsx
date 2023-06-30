@@ -1,5 +1,4 @@
 import { ContainerButton } from './styles'
-
 interface DemonstrationButtonProps {
   text: string
   onModalChatOpen: () => void

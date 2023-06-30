@@ -46,4 +46,9 @@ export const RoundEffect = styled.button`
     border: 1px solid ${({ theme }) => theme['blue-300']};
     border-radius: 4px;
   }
+
+  @media screen and (max-width: 767px) {
+    width: 27px;
+    height: 30px;
+  }
 `

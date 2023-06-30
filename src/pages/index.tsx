@@ -288,13 +288,15 @@ export default function Home({ videos }: Props) {
           </ContainerDemonstrationButton>
 
           <ContainerNoCard>
-            <Imagem src={noCard} alt="logo leadster" />
             <CredicardText>
-              <b>Não</b> é necessário Cartão de Crédito
+              <Imagem src={noCard} alt="logo leadster" />
+              <p>
+                <b>Não</b> é necessário Cartão de Crédito
+              </p>
             </CredicardText>
 
-            <Imagem src={rating} alt="logo leadster" />
             <RatingTaxt>
+              <Imagem src={rating} alt="logo leadster" />
               <b>4.9/5</b> média de satisfação
             </RatingTaxt>
           </ContainerNoCard>

@@ -46,6 +46,7 @@ export const NavMenu = styled.nav`
   @media screen and (max-width: 487px) {
     flex-direction: column;
     align-content: center;
+    text-align: center;
   }
 `
 

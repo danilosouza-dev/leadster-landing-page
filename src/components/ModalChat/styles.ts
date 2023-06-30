@@ -5,10 +5,10 @@ interface ContainerModalVideoProps {
 }
 
 export const ContainerModalChat = styled.div<ContainerModalVideoProps>`
-  width: 33vw;
-  /* height: 85vh; */
+  width: 600px;
   max-width: 600px;
-  /* min-height: 780px; */
+
+  margin: 0 auto;
 
   background: #fff;
   border-radius: 16px;
@@ -37,6 +37,38 @@ export const ContainerModalChat = styled.div<ContainerModalVideoProps>`
 
   iframe {
     border: 0;
+  }
+
+  @media screen and (max-width: 650px) {
+    width: 450px;
+
+    iframe {
+      width: 450px;
+    }
+  }
+
+  @media screen and (max-width: 485px) {
+    width: 360px;
+
+    iframe {
+      width: 450px;
+    }
+  }
+
+  @media screen and (max-width: 390px) {
+    width: 320px;
+
+    iframe {
+      width: 350px;
+    }
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 300px;
+
+    iframe {
+      width: 350px;
+    }
   }
 `
 

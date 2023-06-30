@@ -4,6 +4,10 @@ export const ContainerSelectFilter = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+
+  @media screen and (max-width: 767px) {
+    font-size: 14px;
+  }
 `
 
 export const WrapperSelect = styled.div`
@@ -31,6 +35,10 @@ export const WrapperSelect = styled.div`
 
   label {
     padding-left: 25px;
+  }
+
+  @media screen and (max-width: 767px) {
+    width: 170px;
   }
 `
 
@@ -79,4 +87,8 @@ export const WrapperArrow = styled.div`
 `
 export const SortBy = styled.h4`
   font-weight: 700;
+
+  @media screen and (max-width: 767px) {
+    width: 100px;
+  }
 `

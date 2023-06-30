@@ -8,11 +8,7 @@ import {
 } from './styles'
 import Image from 'next/image'
 import logoAnimation from '@/assets/logo-leadster-animada.gif'
-// import logoLinkedin from '@/assets/linkedin.svg'
-// import logoFacebook from '@/assets/facebook.svg'
-
 import { BiLogoLinkedin, BiLogoInstagram, BiLogoFacebook } from 'react-icons/bi'
-
 import Link from 'next/link'
 
 export function Footer() {

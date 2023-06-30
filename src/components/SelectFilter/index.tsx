@@ -8,7 +8,6 @@ import {
   ContainerSelectFilter,
 } from './styles'
 import { MdArrowDropDown } from 'react-icons/md'
-
 interface SelectFilterProps {
   onSelectFilter: (selectedLabel: string) => void
   sortBy: string
