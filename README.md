@@ -34,7 +34,12 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-Leadster Page é um projeto desenvolvido para um desafio de código proposto pela empresa Leadster
+Leadster Page é um projeto desenvolvido para um desafio de código proposto pela empresa Leadster. 
+  - Para uma experiência mais real, foi utilizado a API do youtube para pegar os vídeos do canal da Leadster.
+  - Na aplicação é possível filtrar os vídeos pelos termos previamente definidos (Chatbot, Mídia Paga e etc...).
+  - Também é possível filtrar pelos mais recentes, mais antigos ou mais relevantes.
+  - A páginação renderiza 9 vídeos por página, assim como estava no layout proposto.
+  - O layout está responsivo e flúido.
 
 ## ⚙ Configuração
 
@@ -43,10 +48,14 @@ Leadster Page é um projeto desenvolvido para um desafio de código proposto pel
 1- Youtube API:
 > Crie uma conta para testar a API do youtube e gere uma chave
   [Criar conta](https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=model-genius-391116)
-  <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=model-genius-391116" target="_blank">Criar conta</a>
+  <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=model-genius-391116" target="_blank"></a>
 
 > Crie um arquivo .env na raiz do projeto e coloque o seguinte código seguido da chame do youtube API
   ``` NEXT_PUBLIC_YOUTUBE_API_KEY=sua-chave-youtube-api ```
+
+> Se tiver dificuldade para criar a chave do Youtube API, utilize uma dessas abaixo:
+  ``` AIzaSyBGaUcGhZ8ohPRjuAJEpNnGDnsXdnorGFg ```
+  ``` AIzaSyBipXj5yOmS9rjOMa2UCdAKO1lASkVlW84 ```
 
 1- Para instalar as dependências:
 > npm install
