@@ -42,7 +42,8 @@ Leadster Page é um projeto desenvolvido para um desafio de código proposto pel
 
 1- Youtube API:
 > Crie uma conta para testar a API do youtube e gere uma chave
-  [Criar conta](https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=model-genius-391116){:target="_blank"}
+  [Criar conta](https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=model-genius-391116)
+  <a href="https://console.cloud.google.com/apis/library/youtube.googleapis.com?project=model-genius-391116" target="_blank">Criar conta</a>
 
 > Crie um arquivo .env na raiz do projeto e coloque o seguinte código seguido da chame do youtube API
   ``` NEXT_PUBLIC_YOUTUBE_API_KEY=sua-chave-youtube-api ```
